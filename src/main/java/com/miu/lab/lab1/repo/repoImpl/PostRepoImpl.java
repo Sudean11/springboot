@@ -2,16 +2,20 @@ package com.miu.lab.lab1.repo.repoImpl;
 
 import com.miu.lab.lab1.entity.Post;
 import com.miu.lab.lab1.repo.PostRepo;
+import org.jetbrains.annotations.NotNull;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Repository
 public class PostRepoImpl implements PostRepo {
     private static List<Post> posts;
+
+    private static long lastId = 10;
     static {
         posts = new ArrayList<>();
         posts.add(new Post(1, "Exploring the Wonders of Nature", "A Photographic Journey", "John Doe"));
@@ -36,19 +40,40 @@ public class PostRepoImpl implements PostRepo {
     }
 
     @Override
-    public Post createNewPost(Post post) {
-        return null;
+    public void createNewPost(@NotNull Post post) {
+        lastId++;
+        post.setId(lastId);
+        posts.add(post);
     }
 
     @Override
-    public Boolean deletePostById(int id) {
-        return null;
+    public void deletePostById(int id) {
+        Post postToDelete = posts.stream().filter(x->x.getId() == id).findFirst().orElse(null);
+        if(postToDelete!=null) {
+            posts.remove(postToDelete);
+        }
     }
 
     @Override
-    public Post updatePostById(int id) {
-        return null;
+    public void updatePostById(int id, Post post) {
+        Post postToUpdate = posts.stream().filter(x->x.getId() == id).findFirst().orElse(null);
+        if(postToUpdate != null){
+            postToUpdate.setAuthor(post.getAuthor());
+            postToUpdate.setContent(post.getContent());
+            postToUpdate.setTitle(post.getTitle());
+        }
     }
 
+    @Override
+    public List<Post> findAllPostsByAuthor(String author) {
+        return posts.stream()
+                .filter(x->x.getAuthor().equals(author))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Post> getPostsByAuthorText(String text) {
+        return posts.stream().filter(x->x.getAuthor().contains(text)).collect(Collectors.toList());
+    }
 
 }
