@@ -18,7 +18,8 @@ public class UserController {
     UserService userService;
 
     @GetMapping
-    public List<UserResponseDto> getUsers(){
+    public List<UserResponseDto> getUsers(
+            @RequestParam(required = false) boolean havingMoreThan1Pos){
         return userService.getUsers();
     }
     @ResponseStatus(HttpStatus.CREATED)
@@ -31,4 +32,6 @@ public class UserController {
     public List<PostDto> getPostFromUserId(@PathVariable long id){
         return userService.getPostFromUserId(id);
     }
+
+
 }
