@@ -18,9 +18,7 @@ public class User {
     long id;
     String name;
 
-    @OneToMany
-    @JoinColumn
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "user_id")
     private List<Post> posts;
-
-
 }

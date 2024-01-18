@@ -1,7 +1,17 @@
 package com.miu.lab.lab1.services;
 
-import org.springframework.stereotype.Service;
+import com.miu.lab.lab1.entity.dtos.PostDto;
+import com.miu.lab.lab1.entity.dtos.requestDto.UserRequestDto;
+import com.miu.lab.lab1.entity.dtos.responseDto.UserResponseDto;
 
-@Service
+import java.util.List;
+
+
 public interface UserService {
+
+    List<UserResponseDto> getUsers();
+    List<UserResponseDto> getUsersWithMoreThanOnePost();
+    UserResponseDto findUserFromId(long userId);
+    void createNewUser(UserRequestDto user);
+    List<PostDto> getPostFromUserId(Long userId);
 }
