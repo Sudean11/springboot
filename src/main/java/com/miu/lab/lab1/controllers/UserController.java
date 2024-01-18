@@ -19,8 +19,9 @@ public class UserController {
 
     @GetMapping
     public List<UserResponseDto> getUsers(
-            @RequestParam(required = false) boolean havingMoreThan1Pos){
-        return userService.getUsers(havingMoreThan1Pos);
+            @RequestParam(required = false, defaultValue = "false") boolean havingMoreThan1Pos,
+            @RequestParam(required = false , defaultValue = "0") int numberOfPosts){
+        return userService.getUsers(havingMoreThan1Pos, numberOfPosts);
     }
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping

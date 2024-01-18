@@ -28,7 +28,10 @@ public class UserServiceImpl implements UserService {
     ListMapper listMapper;
 
     @Override
-    public List<UserResponseDto> getUsers(boolean havingMoreThanOnePost) {
+    public List<UserResponseDto> getUsers(boolean havingMoreThanOnePost, int n) {
+        if(n != 0){
+            return (List<UserResponseDto>)listMapper.mapList(userRepo.findAllByPostCountGreaterThanN(n), new UserResponseDto());
+        }
         if(havingMoreThanOnePost){
             return (List<UserResponseDto>)listMapper.mapList(userRepo.findAllByPostCountGreaterThanOne(), new UserResponseDto());
         }else{
