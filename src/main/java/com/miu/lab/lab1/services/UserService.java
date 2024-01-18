@@ -14,4 +14,5 @@ public interface UserService {
     UserResponseDto findUserFromId(long userId);
     void createNewUser(UserRequestDto user);
     List<PostDto> getPostFromUserId(Long userId);
+    void deleteUser(long id);
 }

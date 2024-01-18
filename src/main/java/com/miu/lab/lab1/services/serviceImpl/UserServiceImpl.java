@@ -63,4 +63,9 @@ public class UserServiceImpl implements UserService {
                 .getPosts();
         return listMapper.mapList(posts, new PostDto());
     }
+
+    @Override
+    public void deleteUser(long id) {
+        userRepo.deleteById(id);
+    }
 }

@@ -23,7 +23,7 @@ public class Post {
 
     String author;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @JoinColumn(name = "post_id")
     List<Comment> commentList;
 }
