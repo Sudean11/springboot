@@ -20,7 +20,7 @@ public class UserController {
     @GetMapping
     public List<UserResponseDto> getUsers(
             @RequestParam(required = false) boolean havingMoreThan1Pos){
-        return userService.getUsers();
+        return userService.getUsers(havingMoreThan1Pos);
     }
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
