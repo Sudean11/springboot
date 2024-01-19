@@ -12,17 +12,28 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/posts")
+@RequestMapping("/api/v1/users")
 public class PostController {
 
 
     @Autowired
     PostService postService;
 
-    @GetMapping
+    @GetMapping("/posts")
     public List<PostDto> findAllPostWithTitle(@RequestParam String title){
         return postService.getPostWithTitleProvided(title);
     }
+
+//    @GetMapping("/{user_id}/posts")
+//    public List<PostDto> findAllPostsOfUserId(@PathVariable int user_id){
+//        return postService.getPostsOfUser(user_id);
+//    }
+
+    @GetMapping("/{user_id}/posts/{post_id}")
+    public PostDto findPostWithId(@PathVariable int user_id, @PathVariable int post_id){
+        return postService.findPostFromPostId(user_id, post_id);
+    }
+
 
 
 }

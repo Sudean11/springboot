@@ -16,8 +16,7 @@ public interface UserRepo extends JpaRepository<User, Long> {
 
     @Query("Select u from User u where size(u.posts) > :n")
     List<User> findAllByPostCountGreaterThanN(int n);
-
-
-
+    @Query("Select u from User u Join u.posts p where p.title = :title")
+    List<User> findAllByPostsTitle(String title);
 
 }

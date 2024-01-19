@@ -9,10 +9,11 @@ import java.util.List;
 
 public interface UserService {
 
-    List<UserResponseDto> getUsers(boolean havingMoreThanOnePost, int n);
+    List<UserResponseDto> getUsers(boolean havingMoreThanOnePost, int n, String postTitle);
     List<UserResponseDto> getUsersWithMoreThanOnePost();
     UserResponseDto findUserFromId(long userId);
     void createNewUser(UserRequestDto user);
     List<PostDto> getPostFromUserId(Long userId);
     void deleteUser(long id);
+    List<UserResponseDto> findAllByPostTitle(String title);
 }

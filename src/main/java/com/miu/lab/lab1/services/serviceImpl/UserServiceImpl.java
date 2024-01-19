@@ -28,9 +28,12 @@ public class UserServiceImpl implements UserService {
     ListMapper listMapper;
 
     @Override
-    public List<UserResponseDto> getUsers(boolean havingMoreThanOnePost, int n) {
+    public List<UserResponseDto> getUsers(boolean havingMoreThanOnePost, int n, String postTitle) {
         if(n != 0){
             return (List<UserResponseDto>)listMapper.mapList(userRepo.findAllByPostCountGreaterThanN(n), new UserResponseDto());
+        }
+        if(!postTitle.equals("")){
+            return findAllByPostTitle(postTitle);
         }
         if(havingMoreThanOnePost){
             return (List<UserResponseDto>)listMapper.mapList(userRepo.findAllByPostCountGreaterThanOne(), new UserResponseDto());
@@ -70,5 +73,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(long id) {
         userRepo.deleteById(id);
+    }
+
+    @Override
+    public List<UserResponseDto> findAllByPostTitle(String title) {
+        return (List<UserResponseDto>)listMapper.mapList(userRepo.findAllByPostsTitle(title), new UserResponseDto());
     }
 }
