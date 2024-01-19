@@ -2,6 +2,7 @@ package com.miu.lab.lab1.controllers;
 
 import com.miu.lab.lab1.ExceptionHandler.SpringExceptionHandler;
 import com.miu.lab.lab1.entity.dtos.CommentDto;
+import com.miu.lab.lab1.entity.dtos.ErrorResponseDto;
 import com.miu.lab.lab1.services.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,11 +27,11 @@ public class CommentController {
         return commentService.findCommentsFromPostId(user_id, post_id);
     }
     @GetMapping("/{user_id}/posts/{post_id}/comments/{comment_id}")
-    public ResponseEntity<CommentDto> findCommentFromCommentId(@PathVariable long user_id, @PathVariable long post_id, @PathVariable long comment_id){
+    public ResponseEntity<?> findCommentFromCommentId(@PathVariable long user_id, @PathVariable long post_id, @PathVariable long comment_id){
         try {
             return ResponseEntity.ok(commentService.findCommentsFromPostId(user_id, post_id, comment_id));
         } catch (SpringExceptionHandler e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorResponseDto(e.getMessage()));
         }
     }
 
