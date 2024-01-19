@@ -1,5 +1,6 @@
 package com.miu.lab.lab1.services;
 
+import com.miu.lab.lab1.ExceptionHandler.SpringExceptionHandler;
 import com.miu.lab.lab1.entity.dtos.CommentDto;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,7 +13,7 @@ public interface CommentService {
 
     List<CommentDto> findCommentsFromPostId(long user_id,long post_id);
 
-    CommentDto findCommentsFromPostId(long user_id, long post_id, long comment_id);
+    CommentDto findCommentsFromPostId(long user_id, long post_id, long comment_id) throws SpringExceptionHandler;
 }
 
 

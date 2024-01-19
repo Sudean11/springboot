@@ -1,5 +1,6 @@
 package com.miu.lab.lab1.services.serviceImpl;
 
+import com.miu.lab.lab1.ExceptionHandler.SpringExceptionHandler;
 import com.miu.lab.lab1.entity.Comment;
 import com.miu.lab.lab1.entity.Post;
 import com.miu.lab.lab1.entity.User;
@@ -52,7 +53,7 @@ public class CommentServiceImpl implements CommentService {
     public CommentDto findCommentsFromPostId(
             long user_id,
             long post_id,
-            long comment_id) {
+            long comment_id) throws SpringExceptionHandler {
 
         User user = userRepo.findById(user_id).orElse(null);
         if(user!=null){
@@ -64,6 +65,6 @@ public class CommentServiceImpl implements CommentService {
                 }
             }
         }
-        return null;
+        throw new SpringExceptionHandler("Comment not found");
     }
 }
