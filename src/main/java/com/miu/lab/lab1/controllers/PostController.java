@@ -16,5 +16,13 @@ import java.util.List;
 public class PostController {
 
 
+    @Autowired
+    PostService postService;
+
+    @GetMapping
+    public List<PostDto> findAllPostWithTitle(@RequestParam String title){
+        return postService.getPostWithTitleProvided(title);
+    }
+
 
 }
