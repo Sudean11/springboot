@@ -62,9 +62,14 @@ public class CommentServiceImpl implements CommentService {
                 Comment comment = post.getCommentList().stream().filter(x->x.getId() == comment_id).findFirst().orElse(null);
                 if(comment != null){
                     return modelMapper.map(comment, CommentDto.class);
+                }else{
+                    throw new SpringExceptionHandler("Comment not found for the id");
                 }
+            }else{
+                throw new SpringExceptionHandler("Post not found for the id");
             }
+        }else{
+            throw new SpringExceptionHandler("User not found for the id");
         }
-        throw new SpringExceptionHandler("Comment not found");
     }
 }

@@ -28,7 +28,4 @@ public class PostController {
     public PostDto findPostWithId(@PathVariable int user_id, @PathVariable int post_id){
         return postService.findPostFromPostId(user_id, post_id);
     }
-
-
-
 }
