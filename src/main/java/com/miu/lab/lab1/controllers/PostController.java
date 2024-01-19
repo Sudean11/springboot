@@ -24,11 +24,6 @@ public class PostController {
         return postService.getPostWithTitleProvided(title);
     }
 
-//    @GetMapping("/{user_id}/posts")
-//    public List<PostDto> findAllPostsOfUserId(@PathVariable int user_id){
-//        return postService.getPostsOfUser(user_id);
-//    }
-
     @GetMapping("/{user_id}/posts/{post_id}")
     public PostDto findPostWithId(@PathVariable int user_id, @PathVariable int post_id){
         return postService.findPostFromPostId(user_id, post_id);
