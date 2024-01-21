@@ -31,7 +31,7 @@ public class UserController {
             @RequestParam(required = false, defaultValue = "false") boolean havingMoreThan1Pos,
             @RequestParam(required = false , defaultValue = "0") int numberOfPosts,
             @RequestParam(required = false , defaultValue = "") String postTitle
-            ){
+            ) throws Exception {
         return userService.getUsers(havingMoreThan1Pos, numberOfPosts, postTitle);
     }
 

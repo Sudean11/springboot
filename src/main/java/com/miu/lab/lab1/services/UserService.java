@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface UserService {
 
-    List<UserResponseDto> getUsers(boolean havingMoreThanOnePost, int n, String postTitle);
+    List<UserResponseDto> getUsers(boolean havingMoreThanOnePost, int n, String postTitle) throws Exception;
     List<UserResponseDto> getUsersWithMoreThanOnePost();
     UserResponseDto findUserFromId(long userId);
     void createNewUser(UserRequestDto user);
