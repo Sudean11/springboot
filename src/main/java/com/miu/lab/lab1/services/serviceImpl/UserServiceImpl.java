@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponseDto findUserFromId(long userId) {
-        return null;
+        return modelMapper.map( userRepo.findById(userId), UserResponseDto.class);
     }
 
     @Override
