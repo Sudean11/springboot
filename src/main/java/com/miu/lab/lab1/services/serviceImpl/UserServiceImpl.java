@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserResponseDto> getUsersWithMoreThanOnePost() {
         return userRepo.findAllByPostCountGreaterThanOne().stream()
-                .map(x->new UserResponseDto(x.getName()))
+                .map(x->new UserResponseDto(x.getFirstname()))
                 .collect(Collectors.toList());
     }
 
