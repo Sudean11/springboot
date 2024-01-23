@@ -22,7 +22,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,8 +34,8 @@ public class SecurityConfig {
     private final UserDetailsService userDetailsService;
     private final JwtFilter jwtFilter;
 
-//    String[] roles = {"CLIENT","ADMIN"}; // You can make this a call from the DB
-  String [] roles = {"ADMIN"}; // Try this :)
+    String[] roles = {"CLIENT","ADMIN"}; // You can make this a call from the DB
+//  String [] roles = {"CLIENT"}; // Try this :)
 
     @Bean
     public UserDetailsService userDetailsSvc() {
@@ -53,9 +52,9 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-//                        .requestMatchers(new AntPathRequestMatcher("/api/v1/authenticate")).permitAll()
-//                        .requestMatchers("/api/v1/users").hasAnyAuthority(roles)
-                        .anyRequest().permitAll()
+                        .requestMatchers("/api/v1/authenticate/**").permitAll()
+                        .requestMatchers("/api/v1/users").hasAnyAuthority(roles)
+                        .anyRequest().authenticated()
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
