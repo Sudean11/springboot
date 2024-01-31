@@ -1,5 +1,6 @@
 package com.miu.lab.lab1.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,5 +26,7 @@ public class Post {
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @JoinColumn(name = "post_id")
+    @JsonBackReference
     List<Comment> commentList;
+
 }

@@ -1,10 +1,13 @@
 package com.miu.lab.lab1.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.miu.lab.lab1.entity.dtos.PostDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -30,6 +33,7 @@ public class User {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable
     private List<Role> roles;
+
 
 
 }
